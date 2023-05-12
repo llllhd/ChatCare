@@ -108,8 +108,8 @@ if st.session_state['temp']:
     with st.spinner('等待回复中...'):
         output = chat(
             st.session_state['temp'],
-#             user=st.session_state['user'],
-#             gen=st.session_state['gen'],
+            user=st.session_state['user'],
+            gen=st.session_state['gen'],
             temperature=0.7,
             # repetition_penalty=1
         )
