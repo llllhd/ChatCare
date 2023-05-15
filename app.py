@@ -115,11 +115,18 @@ if st.session_state['temp']:
         )
 
     if output == 503:
+        try_times = 0
         # st.info('ChatCare正在加载模型中，请稍等20秒左右重试...', icon='⏳')
         with st.spinner('⏳ChatCare正在加载模型中，请稍等...'):
             while chat('') in [503, None]:
                 sleep(5)
-        st.success('模型加载完成，开始聊天吧！', icon='🥳')
+                try_times += 1
+                if try_times == 7:
+                    break
+        if try_times == 7:
+            st.error('模型暂时无法加载，请稍后再试')
+        else:
+            st.success('模型加载完成，开始聊天吧！', icon='🥳')
 
     elif output == None:
         st.error('发生了某些错误，请重试！', icon='🚨')
