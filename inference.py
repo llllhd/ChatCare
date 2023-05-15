@@ -46,7 +46,7 @@ def chat(input_text, sample=True, max_length=512, top_p=1, temperature=0.7, user
     }
     try:
         response = requests.post(api_url, headers=headers, json=payload)
-        # print('response:', response)
+        print('response:', response)
         if response.status_code == 200:
             return postprocess(response.json()[0]['generated_text'])
         elif response.status_code == 503:
